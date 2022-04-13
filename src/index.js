@@ -19,8 +19,8 @@ function crearteInstance(defaultConfig) {
   const instance = Fetch.prototype.request.bind(context)
   extend(instance, Fetch.prototype, context)
 
-  instance.extend = function extend() {
-    return crearteInstance()
+  instance.extend = function extend(config) {
+    return crearteInstance(config)
   }
 
   return instance
