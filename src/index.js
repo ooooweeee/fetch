@@ -1,5 +1,7 @@
 const extend = require('./utils/extend')
 const forEach = require('./utils/forEach')
+const mergeConfig = require('./utils/mergeConfig')
+const adapter = require('./adapter')
 
 function Fetch(config) {
   this.default = config
@@ -20,12 +22,10 @@ function crearteInstance(defaultConfig) {
   extend(instance, Fetch.prototype, context)
 
   instance.extend = function extend(config) {
-    return crearteInstance(config)
+    return crearteInstance(mergeConfig(defaultConfig, config))
   }
 
   return instance
 }
 
-const instance = crearteInstance({ name: 'dahengzhang' })
-instance({})
-instance.get({})
+module.exports = crearteInstance({ adapter: adapter })
