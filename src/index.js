@@ -1,6 +1,7 @@
 const extend = require('./utils/extend')
 const forEach = require('./utils/forEach')
 const mergeConfig = require('./utils/mergeConfig')
+const dispatchRequest = require('./reqeust')
 const adapter = require('./adapter')
 
 function Fetch(config) {
@@ -8,6 +9,8 @@ function Fetch(config) {
 }
 Fetch.prototype.request = function request(config) {
   console.log('config', this.default, config)
+
+  return dispatchRequest(config)
 }
 
 forEach(['get'], function hand(method) {
