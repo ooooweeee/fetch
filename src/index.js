@@ -2,19 +2,29 @@ const extend = require('./utils/extend')
 const forEach = require('./utils/forEach')
 const mergeConfig = require('./utils/mergeConfig')
 const adapter = require('./adapter')
+const dispatchRequest = require('./code/request')
 
 function Fetch(config) {
   this.default = config
 }
 Fetch.prototype.request = function request(config) {
-  console.log('config', this.default, config)
+  const _config = mergeConfig(this.default, config)
+  return dispatchRequest(_config)
 }
 
-forEach(['get'], function hand(method) {
-  Fetch.prototype[method] = function (config) {
-    return this.request(config)
+forEach(
+  ['delete', 'get', 'head', 'options', 'post', 'put', 'patch'],
+  function hand(method) {
+    Fetch.prototype[method] = function (url, config) {
+      return this.request(
+        mergeConfig(config, {
+          url: url,
+          method: method
+        })
+      )
+    }
   }
-})
+)
 
 function crearteInstance(defaultConfig) {
   const context = new Fetch(defaultConfig)
@@ -28,4 +38,8 @@ function crearteInstance(defaultConfig) {
   return instance
 }
 
-module.exports = crearteInstance({ adapter: adapter })
+module.exports = crearteInstance({
+  adapter: adapter,
+  responseType: 'application/json',
+  headers: { 'Content-Type': 'application/json' }
+})
