@@ -1,6 +1,7 @@
 const extend = require('./utils/extend')
 const forEach = require('./utils/forEach')
 const mergeConfig = require('./utils/mergeConfig')
+const dispatchRequest = require('./reqeust')
 const adapter = require('./adapter')
 const dispatchRequest = require('./code/request')
 
