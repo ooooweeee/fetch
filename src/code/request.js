@@ -1,9 +1,7 @@
-const FormData = require('../FormData')
+const getUri = require('./getUri')
 
 module.exports = function dispatchRequest(config) {
-  console.log(config)
-  if (config.data instanceof FormData) {
-    console.log('表单类型')
-  }
+  config.url = getUri(config)
+
   return config.adapter(config)
 }
