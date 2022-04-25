@@ -24,10 +24,10 @@ router.post('/upload', async (ctx, next) => {
     fs.createWriteStream(path.join(__dirname, 'public/', file.name))
   )
 })
-router.get('/download', async (ctx, next) => {
+router.get('/download', (ctx, next) => {
   const { name } = ctx.request.query
   const filePath = path.join(__dirname, 'public/', name)
-  const stream = await fs.createReadStream(filePath)
+  const stream = fs.createReadStream(filePath)
 
   ctx.set('Content-Disposition', 'attachment; filename=' + name)
   ctx.set('Content-Type', 'application/force-download')

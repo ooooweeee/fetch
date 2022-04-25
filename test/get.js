@@ -5,28 +5,15 @@ const instance = fetch.extend({
   baseURL: 'http://127.0.0.1:3000'
 })
 
-// instance
-//   .get('/search', {
-//     responseType: 'application/json',
-//     params: {
-//       name: 'zhangdaheng'
-//     }
-//   })
-//   .then(res => {
-//     console.log(res)
-//   })
-//   .catch(err => {
-//     console.error(err)
-//   })
-
 const formData = new FormData()
+console.log('formData', formData)
 instance
   .post('/upload', {
     data: formData
   })
-  .then(res => {
+  .then(() => {
     console.log('上传成功')
   })
-  .catch(err => {
-    console.log(err)
+  .catch(() => {
+    console.log('上传失败')
   })

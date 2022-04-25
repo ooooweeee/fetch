@@ -1,7 +1,6 @@
 const extend = require('./utils/extend')
 const forEach = require('./utils/forEach')
 const mergeConfig = require('./utils/mergeConfig')
-const dispatchRequest = require('./reqeust')
 const adapter = require('./adapter')
 const dispatchRequest = require('./code/request')
 
@@ -42,5 +41,5 @@ function crearteInstance(defaultConfig) {
 module.exports = crearteInstance({
   adapter: adapter,
   responseType: 'application/json',
-  headers: { 'Content-Type': 'application/json' }
+  headers: { 'content-type': 'application/json' }
 })
